@@ -49,5 +49,5 @@ gcc phonebook.c -o phonebook
 
 ## 💡 Note
 This project was originally built in C language for my 
-BCA degree. Later converted into a full web application 
+BSC degree. Later converted into a full web application 
 using Replit with a live database.
