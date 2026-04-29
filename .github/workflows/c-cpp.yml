@@ -14,15 +14,10 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Setup MinGW
-        uses: msys2/setup-msys2@v2
-        with:
-          install: mingw-w64-x86_64-gcc
-
-      - name: Compile C code
-        shell: msys2 {0}
+      - name: Compile with GCC
         run: gcc phonebook.c -o phonebook.exe
+        shell: cmd
 
-      - name: Success
-        shell: msys2 {0}
-        run: echo "Build Successful!"
+      - name: Success message
+        run: echo Build Successful!
+        shell: cmd
