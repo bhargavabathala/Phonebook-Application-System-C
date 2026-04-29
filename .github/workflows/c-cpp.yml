@@ -3,8 +3,6 @@ name: Build and Run Phonebook C Project
 on:
   push:
     branches: [ "main" ]
-  pull_request:
-    branches: [ "main" ]
 
 jobs:
   build:
@@ -14,10 +12,18 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Compile with GCC
-        run: gcc phonebook.c -o phonebook.exe
-        shell: cmd
+      - name: Install GCC via Chocolatey
+        run: choco install mingw -y
+        shell: powershell
 
-      - name: Success message
-        run: echo Build Successful!
-        shell: cmd
+      - name: Add MinGW to PATH
+        run: echo "C:\ProgramData\chocolatey\lib\mingw\tools\install\mingw64\bin" >> $env:GITHUB_PATH
+        shell: powershell
+
+      - name: Compile C code
+        run: C:\ProgramData\chocolatey\lib\mingw\tools\install\mingw64\bin\gcc.exe phonebook.c -o phonebook.exe
+        shell: powershell
+
+      - name: Success
+        run: echo "Build Successful!"
+        shell: powershell
