@@ -8,19 +8,21 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
 
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Install GCC
-        run: sudo apt-get install -y gcc
+      - name: Setup MinGW
+        uses: msys2/setup-msys2@v2
+        with:
+          install: mingw-w64-x86_64-gcc
 
-      - name: Find and Compile C file
-        run: |
-          find . -name "*.c" -type f
-          gcc *.c -o phonebook
+      - name: Compile C code
+        shell: msys2 {0}
+        run: gcc phonebook.c -o phonebook.exe
 
-      - name: Success message
-        run: echo "✅ Build Successful! Phonebook compiled."
+      - name: Success
+        shell: msys2 {0}
+        run: echo "Build Successful!"
