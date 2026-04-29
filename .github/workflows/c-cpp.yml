@@ -17,8 +17,10 @@ jobs:
       - name: Install GCC
         run: sudo apt-get install -y gcc
 
-      - name: Compile C code
-        run: gcc phonebook.c -o phonebook
+      - name: Find and Compile C file
+        run: |
+          find . -name "*.c" -type f
+          gcc *.c -o phonebook
 
-      - name: Run the program
-        run: echo "Build Successful! Phonebook compiled."
+      - name: Success message
+        run: echo "✅ Build Successful! Phonebook compiled."
